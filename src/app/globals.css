@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3f0ea;
+  --foreground: #2a2825;
+  --card: #faf8f5;
+  --card-foreground: #2a2825;
+  --muted: #eae6de;
+  --muted-foreground: #6b6560;
+  --border: #ddd8ce;
+  --accent: #5f7d66;
+  --accent-hover: #4e6a55;
+  --accent-foreground: #ffffff;
+  --ring: #5f7d66;
+  --success: #4a7c59;
+  --success-muted: #e8f0ea;
+  --destructive: #9e5a52;
+  --destructive-muted: #f5ebe9;
+  --warning: #8a7344;
+  --warning-muted: #f5f0e6;
+}
+
+.dark {
+  --background: #1a1917;
+  --foreground: #f4f2ed;
+  --card: #2e2c28;
+  --card-foreground: #f4f2ed;
+  --muted: #383530;
+  --muted-foreground: #a39e96;
+  --border: #4a4640;
+  --accent: #8faf95;
+  --accent-hover: #a3bfa9;
+  --accent-foreground: #1c1b18;
+  --ring: #8faf95;
+  --success: #8faf95;
+  --success-muted: #2a332c;
+  --destructive: #c49a94;
+  --destructive-muted: #3a2e2c;
+  --warning: #c4b08a;
+  --warning-muted: #3a352c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-destructive: var(--destructive);
+  --color-destructive-muted: var(--destructive-muted);
+  --color-warning: var(--warning);
+  --color-warning-muted: var(--warning-muted);
+  --font-sans: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

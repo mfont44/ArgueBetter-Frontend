@@ -1,0 +1,136 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ArgueBetter API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/conversations": {
+      "post": {
+        "summary": "Create conversation and briefing",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateConversationRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Created" },
+          "402": { "description": "No credits" }
+        }
+      }
+    },
+    "/conversations/{id}/messages": {
+      "post": {
+        "summary": "Send user message",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assistant reply",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SendMessageResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{id}/finish": {
+      "post": {
+        "summary": "Finish and get feedback",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Feedback report" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "CreateConversationRequest": {
+        "type": "object",
+        "required": [
+          "category",
+          "title",
+          "situation_context",
+          "goal",
+          "desired_tone",
+          "other_person_role",
+          "other_person_profile"
+        ],
+        "properties": {
+          "category": { "type": "string" },
+          "title": { "type": "string" },
+          "situation_context": { "type": "string" },
+          "goal": { "type": "string" },
+          "fear": { "type": "string" },
+          "desired_tone": { "type": "string" },
+          "other_person_role": { "type": "string" },
+          "other_person_profile": { "type": "string" },
+          "personality_tags": { "type": "array", "items": { "type": "string" } },
+          "difficulty": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "default": 3,
+            "description": "How tough the simulated other person is (1=easy, 5=hard)"
+          },
+          "retry_of_conversation_id": { "type": "string", "format": "uuid" }
+        }
+      },
+      "SendMessageResponse": {
+        "type": "object",
+        "required": ["assistant_message", "message_id"],
+        "properties": {
+          "assistant_message": { "type": "string" },
+          "message_id": { "type": "string", "format": "uuid" },
+          "turn_count": { "type": "integer" },
+          "exchange_count": { "type": "integer" },
+          "should_end": { "type": "boolean" },
+          "end_reason": {
+            "type": "string",
+            "enum": ["natural_closure", "max_exchanges", "stalemate", "goal_reached"]
+          },
+          "suggested_user_action": { "type": "string" }
+        }
+      }
+    }
+  }
+}
