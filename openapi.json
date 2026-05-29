@@ -112,7 +112,12 @@
             "default": 3,
             "description": "How tough the simulated other person is (1=easy, 5=hard)"
           },
-          "retry_of_conversation_id": { "type": "string", "format": "uuid" }
+          "retry_of_conversation_id": { "type": "string", "format": "uuid" },
+          "language": {
+            "type": "string",
+            "enum": ["ca", "es", "en"],
+            "description": "UI/output language for AI briefing and feedback"
+          }
         }
       },
       "SendMessageResponse": {

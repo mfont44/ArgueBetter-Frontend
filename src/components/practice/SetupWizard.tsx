@@ -20,6 +20,7 @@ import {
   toneLabel,
 } from "@/lib/i18n-display";
 import { createConversation, ApiError, formatApiErrorI18n } from "@/lib/api";
+import { toApiLanguage } from "@/lib/i18n-core";
 import { createClient } from "@/lib/supabase/client";
 import type { UserPlan } from "@/lib/types";
 
@@ -30,7 +31,7 @@ export function SetupWizard({
   credits: number;
   plan?: UserPlan;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const searchParams = useSearchParams();
   const category = searchParams.get("category") ?? "work_career";
@@ -104,6 +105,7 @@ export function SetupWizard({
         other_person_role: otherRole,
         other_person_profile: profileText || t("common.notSpecified"),
         personality_tags: tags,
+        language: toApiLanguage(locale),
       });
 
       sessionStorage.setItem(

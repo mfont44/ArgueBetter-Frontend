@@ -51,6 +51,7 @@ Crea un projecte nou (p. ex. **ArgueBetter Staging**) per no barrejar dades de p
    - `supabase/migrations/002_practice_sessions.sql`
    - `supabase/migrations/003_simulation_v2.sql`
    - `supabase/migrations/004_stripe_billing.sql`
+   - `supabase/migrations/005_conversation_language.sql`
 3. **Settings → API** — guarda:
    - **Project URL** → `NEXT_PUBLIC_SUPABASE_URL` (frontend) i `SUPABASE_URL` (API)
    - **anon public** → només frontend

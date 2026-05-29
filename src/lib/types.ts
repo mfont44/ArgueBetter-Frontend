@@ -1,3 +1,5 @@
+import type { ApiLanguage } from "./i18n-core";
+
 export type ConversationStatus = "active" | "completed";
 export type UserPlan = "free" | "premium";
 
@@ -104,6 +106,7 @@ export interface CreateConversationPayload {
   other_person_profile?: string;
   personality_tags?: string[];
   difficulty?: number;
+  language?: ApiLanguage;
   retry_of_conversation_id?: string;
 }
 

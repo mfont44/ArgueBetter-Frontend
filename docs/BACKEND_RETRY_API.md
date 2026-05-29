@@ -13,7 +13,7 @@ The frontend expects `POST /conversations` to accept an optional `retry_of_conve
 When present, the backend must:
 
 1. Load the source conversation and verify it belongs to the authenticated user and `status = 'completed'`.
-2. Copy setup fields: `category`, `title`, `situation_context`, `goal`, `fear`, `desired_tone`, `other_person_role`, `other_person_profile`, `personality_tags`, and **`difficulty`** (from the source conversation; default 3 if missing).
+2. Copy setup fields: `category`, `title`, `situation_context`, `goal`, `fear`, `desired_tone`, `other_person_role`, `other_person_profile`, `personality_tags`, **`language`**, and **`difficulty`** (from the source conversation; default 3 if missing).
 3. **Regenerate** `character_sheet` via the same LLM step as a new create (do not copy the previous attempt's sheet — avoids accumulated drift).
 4. Reuse `practice_session_id` from the source conversation.
 5. Set `attempt_number = MAX(attempt_number) + 1` for that session.

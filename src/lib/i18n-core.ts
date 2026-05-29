@@ -6,6 +6,16 @@ export const supportedLocales = ["en", "ca", "es"] as const;
 export type Locale = (typeof supportedLocales)[number];
 export const defaultLocale: Locale = "en";
 
+export type ApiLanguage = "ca" | "es" | "en";
+
+export function toApiLanguage(locale: string): ApiLanguage {
+  const tag = locale.toLowerCase().replace(/_/g, "-");
+  if (tag === "ca" || tag.startsWith("ca-")) return "ca";
+  if (tag === "es" || tag.startsWith("es-")) return "es";
+  if (tag === "en" || tag.startsWith("en-")) return "en";
+  return "en";
+}
+
 export const localeCookieName = "lang";
 
 const messages: Record<Locale, typeof en> = { en, ca, es };
